@@ -16,15 +16,12 @@ namespace CaliburnAutoMapperBug.ViewModels {
                 Name = "foo"
             },
             new ModelA {
-                Name = "bar"
-            },
-            new ModelA {
-                Name = "foo bar"
+                Name = "barr"
             }
         };
 
         public BindableCollection<ModelB> Items { get; } = new BindableCollection<ModelB>(
-            Mapper.Map<ModelA[], IEnumerable<ModelB>>(source)
+            IoC.Get<IMapper>().Map<ModelA[], IEnumerable<ModelB>>(source)
         );
 
     }

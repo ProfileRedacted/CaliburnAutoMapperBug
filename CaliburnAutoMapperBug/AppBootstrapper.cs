@@ -26,8 +26,14 @@ namespace CaliburnAutoMapperBug {
             container.Singleton<IEventAggregator, EventAggregator>();
             container.PerRequest<IShell, ShellViewModel>();
 
-            Mapper.Initialize(
-                config => config.CreateMap<ModelA, ModelB>()
+            MapperConfiguration config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<ModelA, ModelB>();
+            });
+
+            container.RegisterInstance(
+                typeof(IMapper),
+                "automapper",
+                config.CreateMapper()
             );
         }
 
